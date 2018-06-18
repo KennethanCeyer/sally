@@ -2,9 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.DS_Store
 
 # Dataset
 dataset/
+.dataset/
 *.zip
 
 # C extensions
