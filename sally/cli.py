@@ -1,4 +1,8 @@
 import argparse
+from pprint import pprint
+
+import inquirer
+from inquirer import Text
 
 from sally.dataset import DataSet
 from sally.version import VERSION
@@ -11,7 +15,15 @@ def main():
     args = parser.parse_args()
 
     if args.install:
-        dataset = DataSet()
+        questions = [
+            inquirer.List('repository',
+                message='what dataset\'type do you want?',
+                choices=['caltech'],
+            ),
+        ]
+        answers = inquirer.prompt(questions)
+
+        dataset = DataSet(repository=answers['repository'])
         dataset.download()
     else:
         parser.print_help()
