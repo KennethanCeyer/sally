@@ -1,42 +1,43 @@
 import os
+import shutil
 import uuid
-import zipfile
 
-from sally.file import download_link
+from sally.file import download_link, cleanup_path, unzip
+from sally.meta import Meta
 
-__REPOSITORY_LINK_ = {
-    'coco': 'http://images.cocodataset.org/annotations/panoptic_annotations_trainval2017.zip'
+__REPOSITORY_LINK__ = {
+    'caltech': {
+        'link': 'http://www.vision.caltech.edu/Image_Datasets/Caltech101/101_ObjectCategories.tar.gz',
+        'ext': 'tar.gz'
+    }
 }
 
 
-def download(name='dataset', repository='coco'):
-    file_name = '%s.zip' % uuid.uuid4().hex
-    path = os.path.join(os.getcwd(), name, file_name)
-    try_download(path, repository)
-    try_unzip(path)
-    try_extract(path)
+class DataSet:
+    def __init__(self, name='dataset', repository='caltech'):
+        self.name = name
+        self.repository = repository
+        self.meta = Meta(self.repository)
 
+    def download(self):
+        file_name = '%s.%s' % (uuid.uuid4().hex, __REPOSITORY_LINK__[self.repository]['ext'])
+        path = os.path.join(os.getcwd(), self.name, file_name)
+        dir_path = os.path.dirname(path)
+        cleanup_path(dir_path)
+        self.try_download(path)
+        unzip(path)
+        self.try_extract(dir_path)
 
-def try_download(path, repository='coco'):
-    link = __REPOSITORY_LINK_[repository]
-    download_link(path, link)
+    def try_download(self, path):
+        link = __REPOSITORY_LINK__[self.repository]['link']
+        download_link(path, link)
 
-
-def try_unzip(path):
-    with zipfile.ZipFile(path, 'r') as zip_ref:
-        zip_ref.extractall(os.path.dirname(path))
-
-
-def try_extract(path, is_root=True):
-    if not os.path.isdir(path):
-        return
-
-    dir_path = os.path.dirname(path)
-    files = os.listdir(dir_path)
-
-    for file in files:
-        if is_root:
-            try_extract(os.path.join(dir_path, file), False)
-            return
-
-        os.move(os.path.join(dir_path, file), os.path.join(dir_path, '..'))
+    def try_extract(self, dir_path):
+        for path, dirs, files in reversed(list(os.walk(dir_path))):
+            for file in files:
+                diff_path = os.path.abspath(os.path.join(path, file)).replace(os.path.abspath(dir_path), '')
+                file_name = '_'.join(diff_path.split('/')[2:]).lower()
+                if not os.path.exists(os.path.join(dir_path, file_name)):
+                    shutil.move(os.path.join(path, file), os.path.join(dir_path, file_name))
+            if os.path.exists(path) and path is not dir_path:
+                os.rmdir(path)
