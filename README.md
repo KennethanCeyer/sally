@@ -10,7 +10,7 @@
 
 <p align="center">dataset management tool for object detection</p>
 
-[![asciicast](https://asciinema.org/a/187717.png)](https://asciinema.org/a/187717)
+[![asciicast](./docs/.files/sally-cli.gif)](https://asciinema.org/a/187717)
 
 ## Overview
 
