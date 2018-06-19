@@ -2,8 +2,7 @@ import json
 import os
 import uuid
 
-from sally import file
-from sally.file import cleanup_path, unzip
+from sally.file import cleanup_path, unzip, download_link
 
 __REPOSITORY_META__ = {
     'caltech': 'https://requestor-proxy.figure-eight.com/figure_eight_datasets/open-images/zip_files_copy/test.zip'
@@ -23,7 +22,7 @@ class Meta:
         dir_path = os.path.dirname(path)
         cleanup_path(dir_path)
         link = __REPOSITORY_META__[self.repository]
-        file.download_link(path, link)
+        download_link(path, link)
         unzip(path)
         self.parse(dir_path)
 

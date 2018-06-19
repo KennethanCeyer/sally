@@ -4,6 +4,7 @@ import uuid
 
 from sally.file import download_link, cleanup_path, unzip
 from sally.meta import Meta
+from sally.logger import log, LogLevel
 
 __REPOSITORY_LINK__ = {
     'caltech': {
@@ -20,17 +21,23 @@ class DataSet:
         self.meta = Meta(self.repository)
 
     def download(self):
+        log('install dataset from repository `%s`' % self.repository, LogLevel.INFO)
         file_name = '%s.%s' % (uuid.uuid4().hex, __REPOSITORY_LINK__[self.repository]['ext'])
         path = os.path.join(os.getcwd(), self.name, file_name)
         dir_path = os.path.dirname(path)
         cleanup_path(dir_path)
-        self.try_download(path)
+        code = self.try_download(path)
+
+        if code == -1:
+            log('process is refused', LogLevel.ERROR)
+            return code
+
         unzip(path)
         self.try_extract(dir_path)
 
     def try_download(self, path):
         link = __REPOSITORY_LINK__[self.repository]['link']
-        download_link(path, link)
+        return download_link(path, link)
 
     def try_extract(self, dir_path):
         for path, dirs, files in reversed(list(os.walk(dir_path))):
