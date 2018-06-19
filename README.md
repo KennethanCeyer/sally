@@ -1,8 +1,14 @@
 <h1 align="center">sally</h1>
 
-<p align="center">dataset management tool for object detection</p>
+<p align="center">
+    <a href="https://www.codefactor.io/repository/github/kennethanceyer/sally"><img src="https://www.codefactor.io/repository/github/kennethanceyer/sally/badge" /></a>
+    <a href="https://codebeat.co/projects/github-com-kennethanceyer-sally-master"><img alt="codebeat badge" src="https://codebeat.co/badges/f92e5b84-3754-44fe-9a2e-f8fb5dcdd080" /></a>
+    <a href="https://codeclimate.com/github/KennethanCeyer/sally/maintainability"><img src="https://api.codeclimate.com/v1/badges/3cfe32b8d506af47e678/maintainability" /></a>
+    <a href="https://codeclimate.com/github/KennethanCeyer/sally/test_coverage"><img src="https://api.codeclimate.com/v1/badges/3cfe32b8d506af47e678/test_coverage" /></a>
+    <a href="https://github.com/KennethanCeyer/sally/blob/master/LICENSE"><img src="https://img.shields.io/github/license/KennethanCeyer/sally.svg"></a>
+</p>
 
----
+<p align="center">dataset management tool for object detection</p>
 
 [![asciicast](https://asciinema.org/a/187717.png)](https://asciinema.org/a/187717)
 
@@ -43,7 +49,7 @@ dataset.download()
 
 name | option | description | example | note
 -----|--------|-------------|---------|----------
-install | - | `install dataset from repository` | `$ sally install` | -
+install | - | install dataset from repository | `$ sally install` | -
 add | - | adding a repository | `$ sally add {repository} {url}` | `$ sally add coco http://images.cocodataset.org/zips/val2017.zip` | TBA
 remove | - | removing a repository | `$ sally delete {repository}` | `$ sally remove coco` | TBA
 set | - | setting a repository | `$ sally set {repository} {url}` | `$ sally add coco http://images.cocodataset.org/zips/val2017.zip` | TBA
