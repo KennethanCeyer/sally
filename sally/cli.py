@@ -17,7 +17,7 @@ def main():
     if args.install:
         questions = [
             inquirer.List('repository',
-                message='what dataset\'type do you want?',
+                message='what dataset type do you want?',
                 choices=['caltech'],
             ),
         ]

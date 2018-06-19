@@ -12,6 +12,12 @@
 
 [![asciicast](https://asciinema.org/a/187717.png)](https://asciinema.org/a/187717)
 
+## Overview
+
+sally can helps you to download dataset very easily
+
+![dataset](./docs/.files/dataset.png)
+
 ## Installation
 
 sally is still working in progress project, You only can get an experience to use demo as follows
