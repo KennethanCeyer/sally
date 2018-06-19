@@ -56,10 +56,10 @@ dataset.download()
 name | option | description | example | note
 -----|--------|-------------|---------|----------
 install | - | install dataset from repository | `$ sally install` | -
-add | - | adding a repository | `$ sally add {repository} {url}` | `$ sally add coco http://images.cocodataset.org/zips/val2017.zip` | TBA
-remove | - | removing a repository | `$ sally delete {repository}` | `$ sally remove coco` | TBA
-set | - | setting a repository | `$ sally set {repository} {url}` | `$ sally add coco http://images.cocodataset.org/zips/val2017.zip` | TBA
-list | - | show list of repositories | `$ sally list` | `$ sally list` | TBA
+add | - | adding a repository | `$ sally add coco http://images.cocodataset.org/zips/val2017.zip` | TBA
+remove | - | removing a repository | `$ sally remove coco` | TBA
+set | - | setting a repository | `$ sally add coco http://images.cocodataset.org/zips/val2017.zip` | TBA
+list | - | show list of repositories | `$ sally list` | TBA
 
 ### Repositories
 
